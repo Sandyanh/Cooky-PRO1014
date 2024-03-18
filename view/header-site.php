@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/footer.css">
     <link rel="stylesheet" href="assets/css/page-container.css">
+    <link rel="stylesheet" href="assets/css/product-detail.css">
 </head>
 
 <body>
