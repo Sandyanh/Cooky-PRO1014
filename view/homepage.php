@@ -1,4 +1,4 @@
-<main class="page-cointaner">
+<main class="page-container">
     <div class="page-wrapper">
         <div class="home-page-container">
             <div class="swiper-container">
@@ -6,12 +6,12 @@
                     <div class="swiper-slide">
                         <img src="https://image.cooky.vn/abn/s1065x333/600d94ae-f782-43ad-9c7a-e6c60f78ade5.png" alt="Image 1">
                     </div>
-                    <!-- <div class="swiper-slide">
+                    <div class="swiper-slide">
                         <img src="https://image.cooky.vn/abn/s1065x333/bd6d53fa-c2e0-41ea-8549-804612e47770.png" alt="Image 2">
                     </div>
                     <div class="swiper-slide">
                         <img src="https://image.cooky.vn/abn/s1065x333/3b913681-79ef-49e5-afca-502686632208.png" alt="Image 3">
-                    </div> -->
+                    </div>
                 </div>
             </div>
             <div class="short-link-list">

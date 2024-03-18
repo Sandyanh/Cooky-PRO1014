@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="assets/css/checkout.css">
     <link rel="stylesheet" href="assets/css/profile.css">
     <link rel="stylesheet" href="assets/css/view-cart.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
 </head>
 
 <body>
@@ -22,7 +23,7 @@
         <header class="header">
             <div class="navigation-bar">
                 <div class="logo">
-                    <a href="./index.html">
+                    <a href="./index.php">
                         <img src="https://res.cloudinary.com/do9rcgv5s/image/upload/v1695381181/cooky%20market%20-%20PHP/cva2ntghjzrlryixcojp.svg" alt="Logo Cooky">
                     </a>
                 </div>
