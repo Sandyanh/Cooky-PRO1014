@@ -2,7 +2,8 @@
 <?php
     include("view/header-site.php");
     // include("view/homepage.php");
-    include("view/product-detail.php");
+    // include("view/product-detail.php");
+    include("view/cart/checkout.php");
     include("view/footer-site.php");
     
 ?>
