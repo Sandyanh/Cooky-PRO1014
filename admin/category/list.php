@@ -11,53 +11,54 @@
             <i class="fa-solid fa-plus"></i> Thêm mới danh mục
         </a>
     </div>
-        <table class="table">
-            <thead>
-                <tr class="text-center">
-                    <th class="font-weight-bold w-20px" scope="col">#</th>
-                    <th class="font-weight-bold" scope="col">ID</th>
-                    <th class="font-weight-bold" scope="col">Tên danh mục</th>
-                    <th class="font-weight-bold" scope="col">Hình ảnh</th>
-                    <th class="font-weight-bold" scope="col">Ngày tạo</th>
-                    <th class="font-weight-bold" scope="col">Ngày cập nhật</th>
-                    <th class="font-weight-bold" scope="col">Hành động</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="text-center">
-                        <?php
-                            foreach ($listdanhmuc as $danhmuc ) {
-                                extract($danhmuc);
-                                $hinhpath = "../upload/" . $image;
+    <table class="table">
+        <thead>
+            <tr class="text-center">
+                <th class="font-weight-bold w-20px" scope="col">#</th>
+                <th class="font-weight-bold" scope="col">ID</th>
+                <th class="font-weight-bold" scope="col">Tên danh mục</th>
+                <th class="font-weight-bold" scope="col">Hình ảnh</th>
+                <th class="font-weight-bold" scope="col">Ngày tạo</th>
+                <th class="font-weight-bold" scope="col">Ngày cập nhật</th>
+                <th class="font-weight-bold" scope="col">Hành động</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="text-center">
+                <?php
+                foreach ($listdanhmuc as $danhmuc) {
+                    extract($danhmuc);
+                    $hinhpath = "../upload/" . $image;
 
-                        if (is_file($hinhpath)) {
-                            $hinh = "<img src='" . $hinhpath . "' height='100'>";
-                        } else {
-                            $hinh = "no photo";
-                        }
-                                echo
-                                '<tr>
+                    if (is_file($hinhpath)) {
+                        $hinh = "<img src='" . $hinhpath . "' height='100'>";
+                    } else {
+                        $hinh = "no photo";
+                    }
+                    echo
+                    '<tr>
                                     <td scope="row">
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox" value="">
                                         </div>
                                     </td>
-                                    <td>'.$id.'</td>
-                                    <td class="text-primary">'.$name.'</td>
-                                    <td>'.$hinh.'</td>
-                                    <td>'.$created_at.'</td>
-                                    <td>'.$updated_at.'</td>
+                                    <td>' . $id . '</td>
+                                    <td class="text-primary">' . $name . '</td>
+                                    <td>' . $hinh . '</td>
+                                    <td>' . $created_at . '</td>
+                                    <td>' . $updated_at . '</td>
                                     <td>
                                         <a href="index.php?act==<?= $id ?>" title="Xóa" class="btn btn-outline-danger btn-sm border border-0 delete-category-button" data-category-id="<?= $id ?>"><i class="fa-regular fa-trash-can"></i></a>
                                         <a href="index.php?act==<?= $id ?>" title="Sửa" class="btn btn-outline-info btn-sm border border-0"><i class="fa-regular fa-pen-to-square"></i></a>
                                     </td>
-                                </tr>';}
-                        ?>
-                </tr>
+                                </tr>';
+                }
+                ?>
+            </tr>
 
         </tbody>
-        </table>
-        
+    </table>
+
 </div>
 <script>
     function confirmDelete(categoryId) {
