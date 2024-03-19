@@ -8,7 +8,7 @@ if (isset($_GET['act']) && $_GET['act'] != "") {
     $act = $_GET['act'];
     switch ($act) {
         case 'category':
-            include("category/list.php");
+            include("category/list.php"); 
         break;
         case 'category-add':
             include("category/add.php");
