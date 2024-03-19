@@ -29,32 +29,30 @@
                 foreach ($listdanhmuc as $danhmuc) {
                     extract($danhmuc);
                     $hinhpath = "../upload/" . $image;
-
-                    if (is_file($hinhpath)) {
-                        $hinh = "<img src='" . $hinhpath . "' height='100'>";
-                    } else {
-                        $hinh = "no photo";
-                    }
-                    echo
-                    '<tr>
-                                    <td scope="row">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="">
-                                        </div>
-                                    </td>
-                                    <td>' . $id . '</td>
-                                    <td class="text-primary">' . $name . '</td>
-                                    <td>' . $hinh . '</td>
-                                    <td>' . $created_at . '</td>
-                                    <td>' . $updated_at . '</td>
-                                    <td>
-                                        <a href="index.php?act==<?= $id ?>" title="Xóa" class="btn btn-outline-danger btn-sm border border-0 delete-category-button" data-category-id="<?= $id ?>"><i class="fa-regular fa-trash-can"></i></a>
-                                        <a href="index.php?act==<?= $id ?>" title="Sửa" class="btn btn-outline-info btn-sm border border-0"><i class="fa-regular fa-pen-to-square"></i></a>
-                                    </td>
-                                </tr>';
-                }
+                    $showImage = is_file($hinhpath)
+                        ? "<img class='border rounded' src='{$hinhpath}' alt='{$name}'height='100' width='100' style='object-fit: cover'/>"
+                        : "<img class='border rounded' src='https://res.cloudinary.com/do9rcgv5s/image/upload/v1695895241/cooky%20market%20-%20PHP/itcq4ouly2zgyzxqwmeh.jpg' alt='Không có ảnh' height='100' width='100'>";
                 ?>
+            <tr>
+                <td scope="row">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="">
+                    </div>
+                </td>
+                <td><?= $id ?></td>
+                <td class="text-primary"><?= $name ?></td>
+                <td><?= $showImage ?></td>
+                <td><?= $created_at ?></td>
+                <td><?=$updated_at ?></td>
+                <td>
+                    <a href="index.php?act=category-delete&id=<?= $id ?>" title="Xóa" class="btn btn-outline-danger btn-sm border border-0 delete-category-button" data-category-id="<?= $id ?>"><i class="fa-regular fa-trash-can"></i></a>
+                    <a href="index.php?act=category-detail&id=<?= $id ?>" title="Sửa" class="btn btn-outline-info btn-sm border border-0"><i class="fa-regular fa-pen-to-square"></i></a>
+                </td>
             </tr>
+        <?php
+                }
+        ?>
+        </tr>
 
         </tbody>
     </table>
@@ -73,7 +71,7 @@
             confirmButtonText: 'Xác nhận',
         }).then((result) => {
             if (result.isConfirmed) {
-                window.location.href = 'index.php?req=category-delete&id=' + categoryId;
+                window.location.href = 'index.php?act=category-delete&id=' + categoryId;
             }
         });
     }
