@@ -17,7 +17,7 @@
             <small class="text-danger"></small>
         </div>
         <div class="form-group">
-            <img class='border rounded' id="preview-image" src="" alt="" height='115' width='115' style='object-fit: cover'>
+            <img class='border rounded' id="preview-image" src="https://res.cloudinary.com/do9rcgv5s/image/upload/v1695895241/cooky%20market%20-%20PHP/itcq4ouly2zgyzxqwmeh.jpg" alt="" height='115' width='115' style='object-fit: cover'>
             <input class="form-control form-control-sm d-none" type="file" id="image" name="image" onchange="previewImage(this)">
             <label for="image" class="form-label label-for-file mt-3">
                 <i class="fa-solid fa-file-image"></i>&nbsp;Chọn ảnh
