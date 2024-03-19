@@ -1,3 +1,6 @@
+<?php 
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,7 +18,10 @@
     <link rel="stylesheet" href="assets/css/checkout.css">
     <link rel="stylesheet" href="assets/css/profile.css">
     <link rel="stylesheet" href="assets/css/view-cart.css">
+    <link rel="stylesheet" href="assets/css/login.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
 </head>
 
 <body>
@@ -50,10 +56,21 @@
                         <span class="user-name">Hà Nội</span>
                         <img src="https://res.cloudinary.com/do9rcgv5s/image/upload/v1695387068/cooky%20market%20-%20PHP/ww9hqjdjddhfcrgdiokz.svg" alt="toggle" class="icon toggle">
                     </div>
+                    <?php 
+                    if(isset($_SESSION['user'])){
+                        extract($_SESSION['user']);
+                    ?>
+                    <div class="hotline action login ">
+                            <a style="text-decoration: none; color:white" href="index.php?act=form_account"><img src="https://res.cloudinary.com/do9rcgv5s/image/upload/v1695381877/cooky%20market%20-%20PHP/wb5pyhdq2alh6cx8ml82.svg" alt="Login" class="icon"><p><?=$user?></p></a>
+                        </div>
+                    <?php 
+                }else{ 
+                ?>
                     <div class="hotline action login">
                         <img src="https://res.cloudinary.com/do9rcgv5s/image/upload/v1695381877/cooky%20market%20-%20PHP/wb5pyhdq2alh6cx8ml82.svg" alt="Login" class="icon">
                         <a class="user-name" href="index.php?act=login">Đăng nhập</a>
                     </div>
+                    <?php }?>
                 </div>
             </div>
         </header>
