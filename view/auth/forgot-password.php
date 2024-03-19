@@ -7,7 +7,7 @@
         <div class="formtaikhoan">
        <form action="index.php?act=forgot-password" method="post">
             <h3>Nhập địa chỉ email*</h3>
-            <input type="email" class="login" name="email" placeholder="Email.." required> <br>
+            <input type="email" class="login_user" name="email" placeholder="Email.." required> <br>
             <input type="submit" class="button_submit3" value="GỬI" name="guiemail">
        </form>
        </div>
