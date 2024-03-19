@@ -24,24 +24,40 @@
                 </tr>
             </thead>
             <tbody>
-                    <tr class="text-center">
-                        <td scope="row">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="">
-                            </div>
-                        </td>
-                        <th>1</th>
-                        <td class="text-primary">Thịt Heo</td>
-                        <td><img src="../assets/images/bo-6.png" alt="" width="100" height="100"></td>
-                        <td>19/03/2024</td>
-                        <td>19/03/2024</td>
-                        <td>
-                            <a href="index.php?act==<?= $id ?>" title="Xóa" class="btn btn-outline-danger btn-sm border border-0 delete-category-button" data-category-id="<?= $id ?>"><i class="fa-regular fa-trash-can"></i></a>
-                            <a href="index.php?act==<?= $id ?>" title="Sửa" class="btn btn-outline-info btn-sm border border-0"><i class="fa-regular fa-pen-to-square"></i></a>
-                        </td>
-                    </tr>
-            </tbody>
+                <tr class="text-center">
+                        <?php
+                            foreach ($listdanhmuc as $danhmuc ) {
+                                extract($danhmuc);
+                                $hinhpath = "../upload/" . $image;
+
+                        if (is_file($hinhpath)) {
+                            $hinh = "<img src='" . $hinhpath . "' height='100'>";
+                        } else {
+                            $hinh = "no photo";
+                        }
+                                echo
+                                '<tr>
+                                    <td scope="row">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="">
+                                        </div>
+                                    </td>
+                                    <td>'.$id.'</td>
+                                    <td class="text-primary">'.$name.'</td>
+                                    <td>'.$hinh.'</td>
+                                    <td>'.$created_at.'</td>
+                                    <td>'.$updated_at.'</td>
+                                    <td>
+                                        <a href="index.php?act==<?= $id ?>" title="Xóa" class="btn btn-outline-danger btn-sm border border-0 delete-category-button" data-category-id="<?= $id ?>"><i class="fa-regular fa-trash-can"></i></a>
+                                        <a href="index.php?act==<?= $id ?>" title="Sửa" class="btn btn-outline-info btn-sm border border-0"><i class="fa-regular fa-pen-to-square"></i></a>
+                                    </td>
+                                </tr>';}
+                        ?>
+                </tr>
+
+        </tbody>
         </table>
+        
 </div>
 <script>
     function confirmDelete(categoryId) {

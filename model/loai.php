@@ -1,67 +1,36 @@
 <?php
 require_once 'pdo.php';
-
-/**
- * Thêm loại mới
- * @param String $ten_loai là tên loại
- * @throws PDOException lỗi thêm mới
- */
-function loai_insert($ten_loai){
-    $sql = "INSERT INTO loai(ten_loai) VALUES(?)";
-    pdo_execute($sql, $ten_loai);
+function insert_danhmuc($tenloai, $image)
+{
+    $created_at= date('Y-m-d H:i:s');
+    $sql = "INSERT INTO danhmuc(name, image, created_at) values('$tenloai','$image','$created_at')";
+    pdo_execute($sql);
 }
-/**
- * Cập nhật tên loại
- * @param int $ma_loai là mã loại cần cập nhật
- * @param String $ten_loai là tên loại mới
- * @throws PDOException lỗi cập nhật
- */
-function loai_update($ma_loai, $ten_loai){
-    $sql = "UPDATE loai SET ten_loai=? WHERE ma_loai=?";
-    pdo_execute($sql, $ten_loai, $ma_loai);
+function delete_danhmuc($id)
+{
+    $sql = "DELETE FROM danhmuc where id=" . $id;
+    pdo_execute($sql);
 }
-/**
- * Xóa một hoặc nhiều loại
- * @param mix $ma_loai là mã loại hoặc mảng mã loại
- * @throws PDOException lỗi xóa
- */
-function loai_delete($ma_loai){
-    $sql = "DELETE FROM loai WHERE ma_loai=?";
-    if(is_array($ma_loai)){
-        foreach ($ma_loai as $ma) {
-            pdo_execute($sql, $ma);
-        }
+function loadall_danhmuc()
+{
+    $sql = "SELECT * FROM danhmuc order by id desc";
+    $listdanhmuc = pdo_query($sql);
+    return $listdanhmuc;
+}
+function loadone_danhmuc($id)
+{
+    $sql = "SELECT * FROM danhmuc where id=" . $id;
+    $dm = pdo_query_one($sql);
+    return $dm;
+}
+function update_danhmuc($id, $tenloai, $image)
+{
+    $updated_at = date('Y-m-d H:i:s');
+    if ($image != "") {
+        $sql = "UPDATE danhmuc SET name='" . $tenloai . "', image='" . $image . "', updated_at='" . $updated_at . "' WHERE id=" . $id;
+    } else {
+        $sql = "UPDATE danhmuc SET name='" . $tenloai . "', updated_at='" . $updated_at . "' WHERE id=" . $id;
     }
-    else{
-        pdo_execute($sql, $ma_loai);
-    }
+    pdo_execute($sql);
 }
-/**
- * Truy vấn tất cả các loại
- * @return array mảng loại truy vấn được
- * @throws PDOException lỗi truy vấn
- */
-function loai_select_all(){
-    $sql = "SELECT * FROM loai";
-    return pdo_query($sql);
-}
-/**
- * Truy vấn một loại theo mã
- * @param int $ma_loai là mã loại cần truy vấn
- * @return array mảng chứa thông tin của một loại
- * @throws PDOException lỗi truy vấn
- */
-function loai_select_by_id($ma_loai){
-    $sql = "SELECT * FROM loai WHERE ma_loai=?";
-    return pdo_query_one($sql, $ma_loai);
-}
-/**
- * Kiểm tra sự tồn tại của một loại
- * @param int $ma_loai là mã loại cần kiểm tra
- * @return boolean có tồn tại hay không
- * @throws PDOException lỗi truy vấn
- */
-function loai_exist($ma_loai){
-    $sql = "SELECT count(*) FROM loai WHERE ma_loai=?";
-    return pdo_query_value($sql, $ma_loai) > 0;
-}
+?>
