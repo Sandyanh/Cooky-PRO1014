@@ -13,7 +13,7 @@
                 <div class="inter-info"><a href="#"><i class="fa-solid fa-arrows-rotate"></i> Thay đổi thông tin tài khoản</a></div>
                 <div class="inter-info"><a href="#"><i class="fa-solid fa-wrench"></i> Thay đổi mật khẩu</a></div>
                 <?php if ($role == 1) { ?>
-                    <div class="inter-info"><a href="#"><i class="fa-solid fa-key"></i> Trang quản trị</a></div>
+                    <div class="inter-info"><a href="index.php?act=home_admin"><i class="fa-solid fa-key"></i> Trang quản trị</a></div>
                 <?php } ?>
                 <div class="inter-info"><a href="index.php?act=logout"><i class="fa-solid fa-right-from-bracket"></i> <strong>Đăng xuất</strong></a>
                 </div>

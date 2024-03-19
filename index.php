@@ -62,6 +62,9 @@ if (isset($_GET['act']) && $_GET['act'] != "") {
         case 'form_account':
             include("view/auth/form_account.php");
              break;
+        case 'home_admin':
+            header("location: admin/index.php");
+            break;
         default:
             include("view/homepage.php");
             break;

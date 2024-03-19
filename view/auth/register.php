@@ -7,9 +7,9 @@
             </div>
         <div class="formtaikhoan">
        <form action="index.php?act=register" method="post">
-            <input type="email" class="login" name="email" placeholder="Email.." required> <br>
-            <input type="text" class="login" name="user" placeholder="Tên đăng nhập.." required> <br>
-            <input type="password" class="login" name="pass" id="" placeholder="Pass.." required> <br>
+            <input type="email" class="login_user" name="email" placeholder="Email.." required> <br>
+            <input type="text" class="login_user" name="user" placeholder="Tên đăng nhập.." required> <br>
+            <input type="password" class="login_user" name="pass" id="" placeholder="Pass.." required> <br>
             <input type="submit" class="button_submit" value="ĐĂNG KÝ" name="dangky">
        </form>
        </div>
