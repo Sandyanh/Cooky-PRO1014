@@ -10,16 +10,30 @@ include("model/hang-hoa.php");
 include("view/header-site.php");
 
 $listdanhmuc = loadall_danhmuc_trangchu();
+$listdanhmuc_all = loadall_danhmuc();
 $newProductList = hang_hoa_select_moi_nhat("created_at", 12);
 $topViewProductList = hang_hoa_select_moi_nhat("luotxem", 12);
 
 if (isset($_GET['act']) && $_GET['act'] != "") {
     $act = $_GET['act'];
     switch ($act) {
-        case 'product-detail':
-            include("view/product-detail.php");
-            break;
         case 'product':
+            if (isset($_GET['category_id'])) {
+                $category_id = $_GET['category_id'];
+                if ($category_id == 1) {
+                    $categoryDetail['name'] = 'Tất cả';
+                    $productList = hang_hoa_select_all_no_param();
+                    include("view/product-list.php");
+                } elseif ($category_id > 0) {
+                    $categoryDetail = loadone_danhmuc($category_id);
+                    $productList = hang_hoa_select_all("", $category_id);
+                    include("view/product-list.php");
+                }
+            } else {
+                include("view/home-page.php");
+            }
+            break;
+        case 'product-detail':
             include("view/product-list.php");
             break;
         case 'checkout':
