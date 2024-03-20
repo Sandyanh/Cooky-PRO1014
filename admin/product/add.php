@@ -19,8 +19,12 @@
             <div class="form-group col">
                 <label for="productName">Danh mục</label>
                 <select name="category_id" class="form-control form-control-sm">
-                    <option value="">Thịt Heo</option>
-                    <option value="">Thịt Bò</option>
+                    <?php
+                    foreach ($listdanhmuc as $danhmuc) {
+                        extract($danhmuc);
+                        echo '<option value="' . $id . '">' . $name . '</option>';
+                    }
+                    ?>
                 </select>
             </div>
         </div>
