@@ -24,35 +24,38 @@
             </tr>
         </thead>
         <tbody>
-            <tr class="text-center">
-                <?php
-                foreach ($listdanhmuc as $danhmuc) {
-                    extract($danhmuc);
-                    $hinhpath = "../upload/" . $image;
-                    $showImage = is_file($hinhpath)
-                        ? "<img class='border rounded' src='{$hinhpath}' alt='{$name}'height='100' width='100' style='object-fit: cover'/>"
-                        : "<img class='border rounded' src='https://res.cloudinary.com/do9rcgv5s/image/upload/v1695895241/cooky%20market%20-%20PHP/itcq4ouly2zgyzxqwmeh.jpg' alt='Không có ảnh' height='100' width='100'>";
-                ?>
-            <tr>
-                <td scope="row">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="">
-                    </div>
-                </td>
-                <td><?= $id ?></td>
-                <td class="text-primary"><?= $name ?></td>
-                <td><?= $showImage ?></td>
-                <td><?= $created_at ?></td>
-                <td><?=$updated_at ?></td>
-                <td>
-                    <a href="index.php?act=category-delete&id=<?= $id ?>" title="Xóa" class="btn btn-outline-danger btn-sm border border-0 delete-category-button" data-category-id="<?= $id ?>"><i class="fa-regular fa-trash-can"></i></a>
-                    <a href="index.php?act=category-detail&id=<?= $id ?>" title="Sửa" class="btn btn-outline-info btn-sm border border-0"><i class="fa-regular fa-pen-to-square"></i></a>
-                </td>
+            <?php
+            foreach ($listdanhmuc as $danhmuc) {
+                extract($danhmuc);
+                $format_date_create = date('d/m/Y', strtotime($created_at));
+                $format_date_update = ($updated_at == "0000-00-00 00:00:00")
+                    ? "<small class='text-primary'>Chưa cập nhật</small>"
+                    : date('d/m/Y', strtotime($updated_at));
+                $hinhpath = "../upload/" . $image;
+                $showImage = is_file($hinhpath)
+                    ? "<img class='border rounded' src='{$hinhpath}' alt='{$name}'height='100' width='100' style='object-fit: cover'/>"
+                    : "<img class='border rounded' src='https://res.cloudinary.com/do9rcgv5s/image/upload/v1695895241/cooky%20market%20-%20PHP/itcq4ouly2zgyzxqwmeh.jpg' alt='Không có ảnh' height='100' width='100'>";
+            ?>
+                <tr class="text-center">
+                    <td scope="row">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="">
+                        </div>
+                    </td>
+                    <td><?= $id ?></td>
+                    <td class="text-primary"><?= $name ?></td>
+                    <td><?= $showImage ?></td>
+                    <td><?= $format_date_create ?></td>
+                    <td><?= $format_date_update ?></td>
+                    <td>
+                        <a href="index.php?act=category-delete&id=<?= $id ?>" title="Xóa" class="btn btn-outline-danger btn-sm border border-0 delete-category-button" data-category-id="<?= $id ?>"><i class="fa-regular fa-trash-can"></i></a>
+                        <a href="index.php?act=category-detail&id=<?= $id ?>" title="Sửa" class="btn btn-outline-info btn-sm border border-0"><i class="fa-regular fa-pen-to-square"></i></a>
+                    </td>
+                </tr>
+            <?php
+            }
+            ?>
             </tr>
-        <?php
-                }
-        ?>
-        </tr>
 
         </tbody>
     </table>
