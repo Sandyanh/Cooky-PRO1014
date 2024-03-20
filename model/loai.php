@@ -20,7 +20,7 @@ function delete_danhmuc($id)
 }
 function loadall_danhmuc()
 {
-    $sql = "SELECT * FROM danhmuc order by id desc";
+    $sql = "SELECT * FROM danhmuc order by id asc";
     $listdanhmuc = pdo_query($sql);
     return $listdanhmuc;
 }

@@ -32,13 +32,18 @@ function hang_hoa_select_all($keyword, $category_id)
         $sql .= " AND name LIKE '%" . $keyword . "%'";
     }
     if ($category_id > 0) {
-        $sql .= " AND category_id = '" . $category_id . "'";
+        $sql .= " AND iddm = '" . $category_id . "'";
     }
     $sql .= " ORDER BY id DESC";
     $list_product = pdo_query($sql);
     return $list_product;
 }
-
+function hang_hoa_select_all_no_param()
+{
+    $sql = "SELECT * FROM sanpham ORDER BY id DESC";
+    $list_product = pdo_query($sql);
+    return $list_product;
+}
 function hang_hoa_select_by_id($id)
 {
     $sql = "SELECT * FROM sanpham WHERE id =" . $id;

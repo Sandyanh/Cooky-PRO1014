@@ -22,7 +22,7 @@
                             foreach ($listdanhmuc as $danhmuc) {
                                 extract($danhmuc);
                                 $showImage = !empty($image) ? "upload/" . $image : 'https://res.cloudinary.com/do9rcgv5s/image/upload/v1695895241/cooky%20market%20-%20PHP/itcq4ouly2zgyzxqwmeh.jpg';
-                                $linkCategory = "index.php?req=product&category_id=" . $id;
+                                $linkCategory = "index.php?act=product&category_id=" . $id;
                                 echo '<div class="category-item">
                                         <div class="icon">
                                             <a href="' . $linkCategory . '">
@@ -45,7 +45,7 @@
                         <?php
                         foreach ($newProductList as $product) {
                             extract($product);
-                            $linkProduct = "index.php?req=product-detail&id=" . $id;
+                            $linkProduct = "index.php?act=product-detail&id=" . $id;
                             $showImage = !empty($img) ? $imagePath . $img : 'https://res.cloudinary.com/do9rcgv5s/image/upload/v1695895241/cooky%20market%20-%20PHP/itcq4ouly2zgyzxqwmeh.jpg';
                             $formatCurrencyPrice = formatCurrency($price);
                             $formatCurrencyDiscount = formatCurrency($discount);
@@ -94,7 +94,7 @@
                         <?php
                         foreach ($topViewProductList as $product) {
                             extract($product);
-                            $linkProduct = "index.php?req=product-detail&id=" . $id;
+                            $linkProduct = "index.php?act=product-detail&id=" . $id;
                             $showImage = !empty($img) ? $imagePath . $img : 'https://res.cloudinary.com/do9rcgv5s/image/upload/v1695895241/cooky%20market%20-%20PHP/itcq4ouly2zgyzxqwmeh.jpg';
                             $formatCurrencyPrice = formatCurrency($price);
                             $formatCurrencyDiscount = formatCurrency($discount);
