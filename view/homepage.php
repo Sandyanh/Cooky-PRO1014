@@ -18,204 +18,120 @@
                 <div class="swiper-container swiper-container-pointer-events">
                     <div class="swiper-wrapper">
                         <div class="category-slider">
-                            <div class="category-item">
-                                <div class="icon">
-                                    <img class="img-fit" src="https://image.cooky.vn/ads/s320/3754fd39-40ec-4082-8551-d660bceba51c.png" alt="">
-                                </div>
-                                <div class="label text-ellipsis-two-lines">Món mới</div>
-                            </div>
-                            <div class="category-item">
-                                <div class="icon">
-                                    <img class="img-fit" src="https://image.cooky.vn/ads/s320/3754fd39-40ec-4082-8551-d660bceba51c.png" alt="">
-                                </div>
-                                <div class="label text-ellipsis-two-lines">Món mới</div>
-                            </div>
-                            <div class="category-item">
-                                <div class="icon">
-                                    <img class="img-fit" src="https://image.cooky.vn/ads/s320/3754fd39-40ec-4082-8551-d660bceba51c.png" alt="">
-                                </div>
-                                <div class="label text-ellipsis-two-lines">Món mới</div>
-                            </div>
-                            <div class="category-item">
-                                <div class="icon">
-                                    <img class="img-fit" src="https://image.cooky.vn/ads/s320/3754fd39-40ec-4082-8551-d660bceba51c.png" alt="">
-                                </div>
-                                <div class="label text-ellipsis-two-lines">Món mới</div>
-                            </div>
-                            <div class="category-item">
-                                <div class="icon">
-                                    <img class="img-fit" src="https://image.cooky.vn/ads/s320/3754fd39-40ec-4082-8551-d660bceba51c.png" alt="">
-                                </div>
-                                <div class="label text-ellipsis-two-lines">Món mới</div>
-                            </div>
-                            <div class="category-item">
-                                <div class="icon">
-                                    <img class="img-fit" src="https://image.cooky.vn/ads/s320/3754fd39-40ec-4082-8551-d660bceba51c.png" alt="">
-                                </div>
-                                <div class="label text-ellipsis-two-lines">Món mới</div>
-                            </div>
-                            <div class="category-item">
-                                <div class="icon">
-                                    <img class="img-fit" src="https://image.cooky.vn/ads/s320/3754fd39-40ec-4082-8551-d660bceba51c.png" alt="">
-                                </div>
-                                <div class="label text-ellipsis-two-lines">Món mới</div>
-                            </div>
-                            <div class="category-item">
-                                <div class="icon">
-                                    <img class="img-fit" src="https://image.cooky.vn/ads/s320/3754fd39-40ec-4082-8551-d660bceba51c.png" alt="">
-                                </div>
-                                <div class="label text-ellipsis-two-lines">Món mới</div>
-                            </div>
-                            <div class="category-item">
-                                <div class="icon">
-                                    <img class="img-fit" src="https://image.cooky.vn/ads/s320/3754fd39-40ec-4082-8551-d660bceba51c.png" alt="">
-                                </div>
-                                <div class="label text-ellipsis-two-lines">Món mới</div>
-                            </div>
+                            <?php
+                            foreach ($listdanhmuc as $danhmuc) {
+                                extract($danhmuc);
+                                $showImage = !empty($image) ? "upload/" . $image : 'https://res.cloudinary.com/do9rcgv5s/image/upload/v1695895241/cooky%20market%20-%20PHP/itcq4ouly2zgyzxqwmeh.jpg';
+                                $linkCategory = "index.php?req=product&category_id=" . $id;
+                                echo '<div class="category-item">
+                                        <div class="icon">
+                                            <a href="' . $linkCategory . '">
+                                                <img class="img-fit" src="' . $showImage . '" alt="' . $image . '">
+                                            </a>
+                                        </div>
+                                        <div class="label text-ellipsis-two-lines">' . $name . '</div>
+                                    </div>';
+                            }
+                            ?>
                         </div>
                     </div>
                 </div>
             </div>
+            <!-- Sản phẩm mới nhất -->
             <div class="group-product-content">
-                <div class="title">Ưu Đãi 1K Đến 15K</div>
+                <div class="title">✨ Món ăn mới nhất ✨</div>
                 <div class="content-product-container">
                     <div class="promotion-box">
-                        <div class="product-basic-info">
-                            <a class="link-absolute" title="Nạc Dăm Heo Cooky (Thịt Tươi) Đồng Nai" href="https://www.cooky.vn/market/nac-dam-heo-cooky-thit-tuoi-dong-nai-9595"></a>
-                            <div class="cover-box">
-                                <div class="promotion-photo">
-                                    <div class="package-default">
-                                        <img src="https://image.cooky.vn/posproduct/g0/9595/s200x200/c5c2841e-651c-4cf6-bc27-ee86fc7c03d0.png" alt="Sản phẩm" loading="lazy" class="img-fit">
+                        <?php
+                        foreach ($newProductList as $product) {
+                            extract($product);
+                            $linkProduct = "index.php?req=product-detail&id=" . $id;
+                            $showImage = !empty($img) ? $imagePath . $img : 'https://res.cloudinary.com/do9rcgv5s/image/upload/v1695895241/cooky%20market%20-%20PHP/itcq4ouly2zgyzxqwmeh.jpg';
+                            $formatCurrencyPrice = formatCurrency($price);
+                            $formatCurrencyDiscount = formatCurrency($discount);
+
+                            $displayPrice = ($discount == 0) ? $formatCurrencyPrice : $formatCurrencyDiscount;
+                            echo '
+                                <div class="product-basic-info">
+                                    <a class="link-absolute" title="' . $name . '" href="' . $linkProduct . '"></a>
+                                    <div class="cover-box">
+                                        <div class="promotion-photo">
+                                            <div class="package-default">
+                                                <img src="' . $showImage . '" alt="' . $name . '" loading="lazy" class="img-fit">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="promotion-name two-lines">' . $name . '</div>
+                                    <div class="d-flex-center-middle">
+                                        <div class="price-action">
+                                            <div class="product-weight">' . $weight . 'g</div>
+                                            <div class="d-flex-align-items-baseline">
+                                            <div class="sale-price">' . $displayPrice . '</div>';
+                            echo ($discount == 0)
+                                ? ''
+                                : '<div class="unti-price">' . $formatCurrencyPrice . '</div>';
+                            echo '
+                                            </div>
+                                        </div>
+                                        <div class="button-add-to-cart" title="Thêm vào giỏ hàng">
+                                            <div>
+                                            <i class="fa-solid fa-circle-info"></i>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="promotion-name two-lines">Nạc Dăm Heo Cooky (Thịt Tươi) Đồng Nai Nạc Dăm
-                                Heo Cooky (Thịt Tươi) Đồng Nai</div>
-                            <div class="d-flex-center-middle">
-                                <div class="price-action">
-                                    <div class="unti-price">50,000đ</div>
-                                    <div class="sale-price">25,000đ</div>
-                                </div>
-                                <div class="button-add-to-cart" title="Thêm vào giỏ hàng">
-                                    <div>
-                                        <img src="https://res.cloudinary.com/do9rcgv5s/image/upload/v1695381877/cooky%20market%20-%20PHP/r8rvqbn5onuryh7hstio.svg" alt="Thêm vào giỏ hàng">
+                            ';
+                        }
+                        ?>
+                    </div>
+                </div>
+            </div>
+            <!-- Món ăn yêu thích theo lượt xem -->
+            <div class="group-product-content">
+                <div class="title">❤️️ Món ăn yêu thích ❤️️</div>
+                <div class="content-product-container">
+                    <div class="promotion-box">
+                        <?php
+                        foreach ($topViewProductList as $product) {
+                            extract($product);
+                            $linkProduct = "index.php?req=product-detail&id=" . $id;
+                            $showImage = !empty($img) ? $imagePath . $img : 'https://res.cloudinary.com/do9rcgv5s/image/upload/v1695895241/cooky%20market%20-%20PHP/itcq4ouly2zgyzxqwmeh.jpg';
+                            $formatCurrencyPrice = formatCurrency($price);
+                            $formatCurrencyDiscount = formatCurrency($discount);
+
+                            $displayPrice = ($discount == 0) ? $formatCurrencyPrice : $formatCurrencyDiscount;
+                            echo '
+                                <div class="product-basic-info">
+                                    <a class="link-absolute" title="' . $name . '" href="' . $linkProduct . '"></a>
+                                    <div class="cover-box">
+                                        <div class="promotion-photo">
+                                            <div class="package-default">
+                                                <img src="' . $showImage . '" alt="' . $name . '" loading="lazy" class="img-fit">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="promotion-name two-lines">' . $name . '</div>
+                                    <div class="d-flex-center-middle">
+                                        <div class="price-action">
+                                            <div class="product-weight">' . $weight . 'g</div>
+                                            <div class="d-flex-align-items-baseline">
+                                            <div class="sale-price">' . $displayPrice . '</div>';
+                            echo ($discount == 0)
+                                ? ''
+                                : '<div class="unti-price">' . $formatCurrencyPrice . '</div>';
+                            echo '
+                                            </div>
+                                        </div>
+                                        <div class="button-add-to-cart" title="Thêm vào giỏ hàng">
+                                            <div>
+                                                <i class="fa-solid fa-circle-info"></i>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="product-basic-info">
-                            <a class="link-absolute" title="Nạc Dăm Heo Cooky (Thịt Tươi) Đồng Nai" href="https://www.cooky.vn/market/nac-dam-heo-cooky-thit-tuoi-dong-nai-9595"></a>
-                            <div class="cover-box">
-                                <div class="promotion-photo">
-                                    <div class="package-default">
-                                        <img src="https://image.cooky.vn/posproduct/g0/9595/s200x200/c5c2841e-651c-4cf6-bc27-ee86fc7c03d0.png" alt="Sản phẩm" loading="lazy" class="img-fit">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="promotion-name two-lines">Nạc Dăm Heo Cooky (Thịt Tươi) Đồng Nai Nạc Dăm
-                                Heo Cooky (Thịt Tươi) Đồng Nai</div>
-                            <div class="d-flex-center-middle">
-                                <div class="price-action">
-                                    <div class="unti-price">50,000đ</div>
-                                    <div class="sale-price">25,000đ</div>
-                                </div>
-                                <div class="button-add-to-cart" title="Thêm vào giỏ hàng">
-                                    <div>
-                                        <img src="https://res.cloudinary.com/do9rcgv5s/image/upload/v1695381877/cooky%20market%20-%20PHP/r8rvqbn5onuryh7hstio.svg" alt="Thêm vào giỏ hàng">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-basic-info">
-                            <a class="link-absolute" title="Nạc Dăm Heo Cooky (Thịt Tươi) Đồng Nai" href="https://www.cooky.vn/market/nac-dam-heo-cooky-thit-tuoi-dong-nai-9595"></a>
-                            <div class="cover-box">
-                                <div class="promotion-photo">
-                                    <div class="package-default">
-                                        <img src="https://image.cooky.vn/posproduct/g0/9595/s200x200/c5c2841e-651c-4cf6-bc27-ee86fc7c03d0.png" alt="Sản phẩm" loading="lazy" class="img-fit">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="promotion-name two-lines">Nạc Dăm Heo Cooky (Thịt Tươi) Đồng Nai Nạc Dăm
-                                Heo Cooky (Thịt Tươi) Đồng Nai</div>
-                            <div class="d-flex-center-middle">
-                                <div class="price-action">
-                                    <div class="unti-price">50,000đ</div>
-                                    <div class="sale-price">25,000đ</div>
-                                </div>
-                                <div class="button-add-to-cart" title="Thêm vào giỏ hàng">
-                                    <div>
-                                        <img src="https://res.cloudinary.com/do9rcgv5s/image/upload/v1695381877/cooky%20market%20-%20PHP/r8rvqbn5onuryh7hstio.svg" alt="Thêm vào giỏ hàng">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-basic-info">
-                            <a class="link-absolute" title="Nạc Dăm Heo Cooky (Thịt Tươi) Đồng Nai" href="https://www.cooky.vn/market/nac-dam-heo-cooky-thit-tuoi-dong-nai-9595"></a>
-                            <div class="cover-box">
-                                <div class="promotion-photo">
-                                    <div class="package-default">
-                                        <img src="https://image.cooky.vn/posproduct/g0/9595/s200x200/c5c2841e-651c-4cf6-bc27-ee86fc7c03d0.png" alt="Sản phẩm" loading="lazy" class="img-fit">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="promotion-name two-lines">Nạc Dăm Heo Cooky (Thịt Tươi) Đồng Nai Nạc Dăm
-                                Heo Cooky (Thịt Tươi) Đồng Nai</div>
-                            <div class="d-flex-center-middle">
-                                <div class="price-action">
-                                    <div class="unti-price">50,000đ</div>
-                                    <div class="sale-price">25,000đ</div>
-                                </div>
-                                <div class="button-add-to-cart" title="Thêm vào giỏ hàng">
-                                    <div>
-                                        <img src="https://res.cloudinary.com/do9rcgv5s/image/upload/v1695381877/cooky%20market%20-%20PHP/r8rvqbn5onuryh7hstio.svg" alt="Thêm vào giỏ hàng">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-basic-info">
-                            <a class="link-absolute" title="Nạc Dăm Heo Cooky (Thịt Tươi) Đồng Nai" href="https://www.cooky.vn/market/nac-dam-heo-cooky-thit-tuoi-dong-nai-9595"></a>
-                            <div class="cover-box">
-                                <div class="promotion-photo">
-                                    <div class="package-default">
-                                        <img src="https://image.cooky.vn/posproduct/g0/9595/s200x200/c5c2841e-651c-4cf6-bc27-ee86fc7c03d0.png" alt="Sản phẩm" loading="lazy" class="img-fit">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="promotion-name two-lines">Nạc Dăm Heo Cooky (Thịt Tươi) Đồng Nai Nạc Dăm
-                                Heo Cooky (Thịt Tươi) Đồng Nai</div>
-                            <div class="d-flex-center-middle">
-                                <div class="price-action">
-                                    <div class="unti-price">50,000đ</div>
-                                    <div class="sale-price">25,000đ</div>
-                                </div>
-                                <div class="button-add-to-cart" title="Thêm vào giỏ hàng">
-                                    <div>
-                                        <img src="https://res.cloudinary.com/do9rcgv5s/image/upload/v1695381877/cooky%20market%20-%20PHP/r8rvqbn5onuryh7hstio.svg" alt="Thêm vào giỏ hàng">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-basic-info">
-                            <div class="cover-box">
-                                <div class="promotion-photo">
-                                    <div class="package-default">
-                                        <img src="https://image.cooky.vn/posproduct/g0/9595/s200x200/c5c2841e-651c-4cf6-bc27-ee86fc7c03d0.png" alt="Sản phẩm" loading="lazy" class="img-fit">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="promotion-name two-lines">Nạc Dăm Heo Cooky (Thịt Tươi) Đồng Nai</div>
-                            <div class="d-flex-center-middle">
-                                <div class="price-action">
-                                    <div class="unti-price">50,000đ</div>
-                                    <div class="sale-price">25,000đ</div>
-                                </div>
-                                <div class="button-add-to-cart" title="Thêm vào giỏ hàng">
-                                    <div>
-                                        <img src="https://res.cloudinary.com/do9rcgv5s/image/upload/v1695381877/cooky%20market%20-%20PHP/r8rvqbn5onuryh7hstio.svg" alt="Thêm vào giỏ hàng">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                            ';
+                        }
+                        ?>
                     </div>
                 </div>
             </div>

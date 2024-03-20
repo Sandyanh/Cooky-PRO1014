@@ -1,8 +1,17 @@
 <!-- Controller user-->
 <?php
-include("view/header-site.php");
+date_default_timezone_set('Asia/Ho_Chi_Minh');
 include("model/pdo.php");
+include("global.php");
 include("model/taikhoan.php");
+include("model/loai.php");
+include("model/hang-hoa.php");
+
+include("view/header-site.php");
+
+$listdanhmuc = loadall_danhmuc_trangchu();
+$newProductList = hang_hoa_select_moi_nhat("created_at", 12);
+$topViewProductList = hang_hoa_select_moi_nhat("luotxem", 12);
 
 if (isset($_GET['act']) && $_GET['act'] != "") {
     $act = $_GET['act'];
@@ -10,7 +19,7 @@ if (isset($_GET['act']) && $_GET['act'] != "") {
         case 'product-detail':
             include("view/product-detail.php");
             break;
-        case 'product-list':
+        case 'product':
             include("view/product-list.php");
             break;
         case 'checkout':
@@ -24,7 +33,6 @@ if (isset($_GET['act']) && $_GET['act'] != "") {
                 if (is_array($checkuser)) {
                     $_SESSION['user'] = $checkuser;
                     header('Location:index.php');
-
                 } else {
                     $thongbao = "Đăng nhập thấp lại vui lòng kiểm tra lại hoặc điền email đăng ký để lấy lại mật khẩu!";
                 }
@@ -32,15 +40,15 @@ if (isset($_GET['act']) && $_GET['act'] != "") {
             include "view/auth/login.php";
             break;
         case 'register':
-        if (isset($_POST['dangky']) && ($_POST['dangky'])) {
-            $email = $_POST['email'];
-            $user = $_POST['user'];
-            $pass = $_POST['pass'];
-            insert_taikhoan($email,$user,$pass);
-            $thongbao = "Đã đăng ký thành công vui lòng đăng nhập!";
-        }
-        include "view/auth/register.php";
-        break;
+            if (isset($_POST['dangky']) && ($_POST['dangky'])) {
+                $email = $_POST['email'];
+                $user = $_POST['user'];
+                $pass = $_POST['pass'];
+                insert_taikhoan($email, $user, $pass);
+                $thongbao = "Đã đăng ký thành công vui lòng đăng nhập!";
+            }
+            include "view/auth/register.php";
+            break;
         case 'forgot-password':
             if (isset($_POST['guiemail']) && ($_POST['guiemail'])) {
                 $email = $_POST['email'];
@@ -54,14 +62,14 @@ if (isset($_GET['act']) && $_GET['act'] != "") {
             include "view/auth/forgot-password.php";
             break;
         case 'logout':
-            case 'thoat':
-                session_unset();
-                header('Location: index.php');
-                include "view/login.php";
-                break;
+        case 'thoat':
+            session_unset();
+            header('Location: index.php');
+            include "view/login.php";
+            break;
         case 'form_account':
             include("view/auth/form_account.php");
-             break;
+            break;
         case 'home_admin':
             header("location: admin/index.php");
             break;

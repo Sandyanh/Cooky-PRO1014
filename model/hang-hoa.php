@@ -45,7 +45,12 @@ function hang_hoa_select_by_id($id)
     $product = pdo_query_one($sql);
     return $product;
 }
-
+function hang_hoa_select_moi_nhat($orderBy, $limit)
+{
+    $sql = "SELECT * FROM sanpham WHERE 1 ORDER BY $orderBy DESC LIMIT 0,$limit";
+    $list_product = pdo_query($sql);
+    return $list_product;
+}
 function hang_hoa_exist($ma_hh)
 {
     $sql = "SELECT count(*) FROM hang_hoa WHERE ma_hh=?";
