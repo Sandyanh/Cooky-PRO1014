@@ -33,7 +33,7 @@ if (isset($_GET['act']) && $_GET['act'] != "") {
 
         case 'category-detail':
             if (isset($_GET['id']) && ($_GET['id'] > 0)) {
-                $dm = loadone_danhmuc($_GET['id']);
+                $category = loadone_danhmuc($_GET['id']);
             }
             include("./category/update.php");
             break;
@@ -50,7 +50,8 @@ if (isset($_GET['act']) && $_GET['act'] != "") {
                 $thongbao = "Cập nhật thành công";
                 loadall_danhmuc();
             }
-            include("category/update.php");
+            $listdanhmuc = loadall_danhmuc();
+            include("category/list.php");
             break;
         case 'category-delete':
             if (isset($_GET['id']) && ($_GET['id'])) {
