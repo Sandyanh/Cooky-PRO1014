@@ -10,11 +10,11 @@ function hang_hoa_insert($productName, $price, $discount, $image, $weight, $desc
 
 function hang_hoa_update($id, $productName, $price, $discount, $image, $weight, $description, $category_id)
 {
-    // $updated_at = date('Y-m-d H:i:s');
+    $updated_at = date('Y-m-d H:i:s');
     if ($image != "") {
-        $sql = "UPDATE sanpham SET name='" . $productName . "', price='" . $price . "', img='" . $image . "', mota='" . $description . "', iddm='" . $category_id . "', discount='" . $discount . "', weight='" . $weight . "'WHERE id=" . $id;
+        $sql = "UPDATE sanpham SET name='" . $productName . "', price='" . $price . "', img='" . $image . "', mota='" . $description . "', iddm='" . $category_id . "', discount='" . $discount . "', weight='" . $weight . "', updated_at='" . $updated_at . "'WHERE id=" . $id;
     } else {
-        $sql = "UPDATE sanpham SET name='" . $productName . "', price='" . $price . "', mota='" . $description . "', iddm='" . $category_id . "', discount='" . $discount . "', weight='" . $weight . "'WHERE id=" . $id;
+        $sql = "UPDATE sanpham SET name='" . $productName . "', price='" . $price . "', mota='" . $description . "', iddm='" . $category_id . "', discount='" . $discount . "', weight='" . $weight . "', updated_at='" . $updated_at . "'WHERE id=" . $id;
     }
     pdo_execute($sql);
 }
