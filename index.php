@@ -6,7 +6,8 @@ include("global.php");
 include("model/taikhoan.php");
 include("model/loai.php");
 include("model/hang-hoa.php");
-
+include("model/product.php");
+include("model/comment.php");
 include("view/header-site.php");
 
 $listdanhmuc = loadall_danhmuc_trangchu();
@@ -34,7 +35,17 @@ if (isset($_GET['act']) && $_GET['act'] != "") {
             }
             break;
         case 'product-detail':
-            include("view/product-list.php");
+            if (isset($_GET['id']) && $_GET['id'] > 0) {
+                $id = $_GET['id'];
+                $productDetail = product_select_by_id($id);
+                extract($productDetail);
+                $categoryDetail = loadone_danhmuc($id);
+                $productRelated = related_products($id,$iddm);
+                $list_comment = comment_select_all($id);
+                include("view/product-detail.php");
+            } else {
+                include("site/home-page.php");
+            }
             break;
         case 'checkout':
             include("view/cart/checkout.php");
@@ -86,6 +97,17 @@ if (isset($_GET['act']) && $_GET['act'] != "") {
             break;
         case 'home_admin':
             header("location: admin/index.php");
+            break;
+        case 'add-comment':
+            if (isset($_POST['submit']) && ($_POST['submit'])) {
+                $content = $_POST['noidung'];
+                $id_product = $_POST['id_product'];
+                $id_user = $_SESSION['account']['id'];
+                $created_at = date('Y-m-d H:i:s');
+                comment_insert($content, $id_user, $id_product, $created_at);
+                header("Location: " . $_SERVER['HTTP_REFERER']);
+            }
+            include("site/comment/comment-form.php");
             break;
         default:
             include("view/homepage.php");
