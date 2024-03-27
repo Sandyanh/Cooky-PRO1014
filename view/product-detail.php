@@ -1,11 +1,20 @@
-<!-- Chi tiết sản phẩm -->
+<?php
+extract($productDetail);
+$showImage = !empty($img) ? $imagePath . $img : 'https://res.cloudinary.com/do9rcgv5s/image/upload/v1695895241/cooky%20market%20-%20PHP/itcq4ouly2zgyzxqwmeh.jpg';
+// Làm tròn tiền tiết kiệm
+$saveMoney = round(($price - $discount) / 1000);
+// formatCurrency
+$formatCurrencyPrice = formatCurrency($price);
+$formatCurrencyDiscount = formatCurrency($discount);
+$displayPrice = ($discount == 0) ? $formatCurrencyPrice : $formatCurrencyDiscount;
+?>
 <main class="page-container">
     <div class="page-wrapper">
         <div class="breadcrumb">
             <ul class="breadcrumb-list">
                 <li class="breadcrumb-item"><a href="index.php">Cooky</a></li>
-                <li class="breadcrumb-item"><a href="#">Lẩu</a></li>
-                <li class="breadcrumb-item"><span>Lẩu Thái</span></li>
+                <li class="breadcrumb-item"><a href="#"><?= $categoryDetail["name"] ?></a></li>
+                <li class="breadcrumb-item"><span><?= $name ?></span></li>
             </ul>
         </div>
         <div class="product-detail-container">
@@ -14,7 +23,7 @@
                     <div class="photo-box">
                         <div class="main-photo">
                             <div class="avaBox">
-                                <img src="./assets/images/bo-6.png" width="100%" class="img-fit" loading="lazy" alt="">
+                                <img src="<?= $showImage ?>" width="100%" class="img-fit" loading="lazy" alt="<?= $name ?>">
                             </div>
                         </div>
                         <div class="side">
@@ -37,26 +46,31 @@
                 </div>
                 <div class="package-info">
                     <div class="basic-info-box">
-                        <h1 class="name">Lẩu Thái Bò</h1>
+                        <h1 class="name"><?= $name ?></h1>
                         <div class="stat">
-                            <div class="type">Lẩu</div>
+                            <div class="type"><?= $categoryDetail["name"] ?></div>
                             <div class="stat-info"><img src="https://res.cloudinary.com/do9rcgv5s/image/upload/v1696156306/cooky%20market%20-%20PHP/ztvphktbwsioothh6lqh.svg" width="20px">&nbsp;&nbsp; 50</div>
                         </div>
                         <div class="price-x">
                             <div class="price ">
-                                149,000
+                                <?php
+                                echo ($discount == 0)
+                                    ? '<div><span class="sale-info"></span>' . $displayPrice . '</div>'
+                                    : '<div class="unit-price">' . $formatCurrencyPrice . '</div>
+                                    <div><span class="sale-info">-' . $saveMoney . 'K&nbsp;&nbsp;</span>' . $displayPrice . '</div>';
+                                ?>
                             </div>
                         </div>
                     </div>
                     <div class="extra-info-box">
                         <div class="display-flex btn-cart-box">
                             <form action="index.php?req=add-to-cart" method="POST">
-                                <input type="hidden" name="id" value="" />
-                                <input type="hidden" name="name" value="" />
-                                <input type="hidden" name="price" value="" />
-                                <input type="hidden" name="discount" value="" />
-                                <input type="hidden" name="weight" value="" />
-                                <input type="hidden" name="image" value="" />
+                                <input type="hidden" name="id" value="<?= $id ?>" />
+                                <input type="hidden" name="name" value="<?= $name ?>" />
+                                <input type="hidden" name="price" value="<?= $price ?>" />
+                                <input type="hidden" name="discount" value="<?= $discount ?>" />
+                                <input type="hidden" name="weight" value="<?= $weight ?>" />
+                                <input type="hidden" name="image" value="<?= $image ?>" />
                                 <button type="submit" class="btn-add-to-cart n-btn btn-add-to-cart " title="Bấm để thêm vào giỏ hàng" name="add-to-cart" value="Thêm vào giỏ hàng">
                                     <div style="position: relative; z-index: 3;"><span class="row-1">
                                             <div class="icon-total-save"><img class="icon" src="https://res.cloudinary.com/do9rcgv5s/image/upload/v1695386172/cooky%20market%20-%20PHP/fcmcexgvocebzmhuntfm.svg">
@@ -97,7 +111,7 @@
                         <div class="brand-info-box">
                             <div class="brand-info-item">
                                 <div class="brand-into-title">Định lượng</div>
-                                <div class="brand-into-content">900g</div>
+                                <div class="brand-into-content"><?= $weight ?>g</div>
                             </div>
                             <div class="brand-info-item" style="position: relative;">
                                 <div class="brand-into-title">Thương hiệu</div>
@@ -119,16 +133,65 @@
                     </div>
                 </div>
             </div>
+            <!-- Comment box -->
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function() {
+                    $("#comment").load("view/comment-form.php", {
+                        id_product: <?= $id ?>,
+                        // Convert array to json
+                        list_comment: <?= json_encode($list_comment) ?>
+                    });
+                });
+            </script>
             <div id="comment"></div>
             <!-- Product related -->
-            <!-- <div class="group-product-content">
+            <div class="group-product-content">
                 <div class="title">Sản phẩm liên quan</div>
                 <div class="content-product-container">
                     <div class="promotion-box">
-                        
+                        <?php
+                        foreach ($productRelated as $product) {
+                            $linkProduct = "index.php?req=product-detail&id=" . $product['id'];
+                            $showImageRelated = !empty($product['img']) ? $imagePath . $product['img'] : 'https://res.cloudinary.com/do9rcgv5s/image/upload/v1695895241/cooky%20market%20-%20PHP/itcq4ouly2zgyzxqwmeh.jpg';
+
+                            $formatCurrencyPriceRelated = formatCurrency($product['price']);
+                            $formatCurrencyDiscountRelated = formatCurrency($product['discount']);
+                            $displayPriceRelated = ($product['discount'] == 0) ? $formatCurrencyPriceRelated : $formatCurrencyDiscountRelated;
+                            echo '<div class="product-basic-info">
+                                <a class="link-absolute" title="' . $product['name'] . '" href="' . $linkProduct . '"></a>
+                                <div class="cover-box">
+                                    <div class="promotion-photo">
+                                        <div class="package-default">
+                                            <img src="' . $showImageRelated . '" alt="' . $product['name'] . '" loading="lazy" class="img-fit">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="promotion-name two-lines">' . $product['name'] . '</div>
+
+                                <div class="d-flex-center-middle">
+                                <div class="price-action">
+                                    <div class="product-weight">' . $product['weight'] . 'g</div>
+                                    <div class="d-flex-align-items-baseline">
+                                    <div class="sale-price">' . $displayPriceRelated . '</div>';
+                            echo ($product['discount'] == 0)
+                                ? ''
+                                : '<div class="unti-price">' . $formatCurrencyPriceRelated . '</div>';
+                            echo '
+                                    </div>
+                                </div>
+                                <div class="button-add-to-cart" title="Thêm vào giỏ hàng">
+                                    <div>
+                                        <i class="fa-solid fa-circle-info"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>';
+                        }
+                        ?>
                     </div>
                 </div>
-            </div> -->
+            </div>
         </div>
     </div>
 </main>
